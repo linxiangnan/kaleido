@@ -1,0 +1,4 @@
+rootProject.name = 'kaleido'
+include "nettyFront"
+include 'quartz'
+

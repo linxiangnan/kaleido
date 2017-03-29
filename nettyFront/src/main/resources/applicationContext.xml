@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.lxn.front"/>
+
+    <bean id="springListener" name="springListener" class="com.lxn.front.application.AppListener"/>
+
+    <bean id="appContext" name="appContext" class="com.lxn.front.application.AppContext"/>
+
+    <!-- 设置log4j -->
+    <bean name="logger" class="org.apache.log4j.Logger" factory-method="getLogger">
+        <constructor-arg value="netty"/>
+    </bean>
+
+    <bean name="nettyServer" class="com.lxn.front.bootstrap.NettyServerBootstrap" init-method="start" destroy-method="stop">
+        <constructor-arg ref="myChannelInitializer"/>
+        <constructor-arg value="18081"/>
+    </bean>
+
+    <bean id="myChannelInitializer" name="myChannelInitializer" class="com.lxn.front.component.MyChannelInitializer"/>
+
+    <bean id="grpcClientFactory" name="grpcClientFactory" class="com.lxn.front.component.GrpcClientFactory" init-method="init" destroy-method="shutdown">
+        <constructor-arg name="host" value="localhost"/>
+        <constructor-arg name="port" value="18090"/>
+        <constructor-arg name="maxTotal" value="64"/>
+        <constructor-arg name="minIdle" value="0"/>
+        <constructor-arg name="maxIdle" value="64"/>
+    </bean>
+</beans>
