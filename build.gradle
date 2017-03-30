@@ -1,20 +1,49 @@
-group 'com.lxn.kaleidoscope'
-version '1.0-SNAPSHOT'
+buildscript {
+    ext {
+        springBootVersion = '1.4.5.RELEASE'
+    }
+    repositories {
+        // maven库
+        def cn = "http://maven.aliyun.com/nexus/content/groups/public/"
+        def abroad = "http://central.maven.org/maven2/"
+        // 先从url中下载jar若没有找到，则在artifactUrls中寻找
+        maven {
+            url cn
+            artifactUrls abroad
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
 
 allprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
-    group 'com.lxn.kaleidoscope'
+    apply plugin: 'spring-boot'
+    group 'com.lxn.kaleido'
     version = '1.0-SNAPSHOT'
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
-    dependencies {
+    dependencyManagement {
+        imports {
+            mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Camden.SR6'
+        }
+    }
 
+    dependencies {
+        compile 'org.springframework.cloud:spring-cloud-starter-config'
+        compile 'org.springframework.cloud:spring-cloud-starter-eureka'
     }
 }
 subprojects {
     ext {
+        springVersion='4.3.7.RELEASE'
+        grpcVersion='1.2.0'
+        jacksonVersion='2.8.7'
+        slf4jLog4j12Version='1.7.21'
+        commonsPool2Version='2.4.2'
         protoVersion='3.1.0'
     }
     repositories {
