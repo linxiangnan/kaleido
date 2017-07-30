@@ -2,7 +2,6 @@ dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${jacksonVersion}"
     compile group: 'com.google.protobuf', name: 'protobuf-java', version: "${protoVersion}"
     compile group: 'com.google.protobuf', name: 'protobuf-java-util', version: "${protoVersion}"
-    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: "${slf4jLog4j12Version}"
     compile group: 'org.apache.commons', name: 'commons-pool2', version: "${commonsPool2Version}"
     compile group: 'org.springframework', name: 'spring-web', version: "${springVersion}"
     compile group: 'io.grpc', name: 'grpc-all', version: "${grpcVersion}"
