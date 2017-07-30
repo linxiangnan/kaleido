@@ -1,0 +1,7 @@
+dependencies {
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka-server', version: "${eurekaVersion}"
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
