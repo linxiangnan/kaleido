@@ -1,5 +1,8 @@
 dependencies {
 
+    compile group: 'org.quartz-scheduler', name: 'quartz', version: "${quartzVersion}"
+    compile group: 'org.quartz-scheduler', name: 'quartz-jobs', version: "${quartzVersion}"
+
 }
 
 tasks.withType(JavaCompile) {
