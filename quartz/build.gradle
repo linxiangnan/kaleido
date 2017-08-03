@@ -3,6 +3,12 @@ dependencies {
     compile group: 'org.quartz-scheduler', name: 'quartz', version: "${quartzVersion}"
     compile group: 'org.quartz-scheduler', name: 'quartz-jobs', version: "${quartzVersion}"
 
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${jacksonVersion}"
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: "${springBootVersion}"
+
+    compile group: 'mysql', name: 'mysql-connector-java', version: "${mysqlConnectVersion}"
+
 }
 
 tasks.withType(JavaCompile) {
