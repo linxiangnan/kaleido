@@ -7,23 +7,26 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--引入mvc dispatcher配置-->
-    <import resource="dispatcher-servlet.xml"/>
+    <!--自动扫描注解-->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.lxn.quartz"/>
+
+    <!--配置环境-->
+    <!--DEV-->
+    <context:property-placeholder
+            location="classpath:dev/log4j.properties, classpath:dev/mysql.properties"/>
+    <!--PROD-->
+    <!--<context:property-placeholder-->
+            <!--location="classpath:prod/log4j.properties, classpath:prod/mysql.properties"/>-->
+
     <!--引入mysql配置-->
     <import resource="application-mysql.xml"/>
     <!--引入quartz配置-->
     <import resource="application-quartz.xml"/>
 
-    <context:annotation-config/>
-
-    <bean id="springListener" name="springListener" class="com.lxn.quartz.application.AppListener"/>
-
-    <bean id="appContext" name="appContext" class="com.lxn.quartz.application.AppContext"/>
-
     <!-- 设置log4j -->
     <bean name="logger" class="org.apache.log4j.Logger" factory-method="getLogger">
         <constructor-arg value="quartz"/>
     </bean>
-
 
 </beans>
