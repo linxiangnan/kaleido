@@ -1,10 +1,15 @@
 package com.lxn.quartz.web;
 
+import com.lxn.quartz.scheduler.QuartzManager;
 import org.apache.log4j.Logger;
+import org.quartz.CronExpression;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +23,9 @@ public class IndexController {
     @Autowired
     private Logger logger;
 
+    @Autowired
+    private QuartzManager quartzManager;
+
     @RequestMapping("/")
     public Map index() {
 
@@ -27,45 +35,45 @@ public class IndexController {
         return result;
     }
 
-//    @RequestMapping(value = "/test/add_job", method = RequestMethod.POST)
-//    public Map testAddJob(@RequestBody Map request){
-//
-//        String jobName = request.get("jobName").toString();
-//        String jobGroupName = request.get("jobGroupName").toString();
-//        String triggerName = request.get("triggerName").toString();
-//        String triggerGroupName = request.get("triggerGroupName").toString();
-//        String cronExpressionStr = request.get("cronExpressionStr").toString();
-//
-//        CronExpression cronExpression = null;
-//        try {
-//            cronExpression = new CronExpression(cronExpressionStr);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        quartzManager.addJob(jobName, jobGroupName, triggerName, triggerGroupName, cronExpression);
-//
-//        Map<String, Object> result = new HashMap<>();
-//        result.put("code", 0);
-//        result.put("message", "定时任务添加成功。");
-//        return result;
-//    }
-//
-//    @RequestMapping(value = "/test/delete_job", method = RequestMethod.DELETE)
-//    public Map testDeleteJob(@RequestBody Map request){
-//
-//        String jobName = request.get("jobName").toString();
-//        String jobGroupName = request.get("jobGroupName").toString();
-//        String triggerName = request.get("triggerName").toString();
-//        String triggerGroupName = request.get("triggerGroupName").toString();
-//
-//        quartzManager.deleteJob(jobName, jobGroupName, triggerName, triggerGroupName);
-//
-//        Map<String, Object> result = new HashMap<>();
-//        result.put("code", 0);
-//        result.put("message", "定时任务删除成功。");
-//        return result;
-//    }
+    @RequestMapping(value = "/test/add_job", method = RequestMethod.POST)
+    public Map testAddJob(@RequestBody Map request){
+
+        String jobName = request.get("jobName").toString();
+        String jobGroupName = request.get("jobGroupName").toString();
+        String triggerName = request.get("triggerName").toString();
+        String triggerGroupName = request.get("triggerGroupName").toString();
+        String cronExpressionStr = request.get("cronExpressionStr").toString();
+
+        CronExpression cronExpression = null;
+        try {
+            cronExpression = new CronExpression(cronExpressionStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        quartzManager.addJob(jobName, jobGroupName, triggerName, triggerGroupName, cronExpression);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 0);
+        result.put("message", "定时任务添加成功。");
+        return result;
+    }
+
+    @RequestMapping(value = "/test/delete_job", method = RequestMethod.DELETE)
+    public Map testDeleteJob(@RequestBody Map request){
+
+        String jobName = request.get("jobName").toString();
+        String jobGroupName = request.get("jobGroupName").toString();
+        String triggerName = request.get("triggerName").toString();
+        String triggerGroupName = request.get("triggerGroupName").toString();
+
+        quartzManager.deleteJob(jobName, jobGroupName, triggerName, triggerGroupName);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 0);
+        result.put("message", "定时任务删除成功。");
+        return result;
+    }
 
 
 }

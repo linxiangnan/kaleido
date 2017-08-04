@@ -3,7 +3,6 @@ allprojects {
 
     apply plugin: 'java'
     apply plugin: 'idea'
-    apply plugin: 'war'
     group 'com.lxn.kaleido'
     version = '1.0-SNAPSHOT'
     sourceCompatibility = 1.8
