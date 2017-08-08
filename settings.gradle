@@ -1,3 +1,5 @@
 rootProject.name = 'kaleido'
 include "nettyFront"
 include 'quartz'
+include 'all'
+
